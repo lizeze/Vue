@@ -54,6 +54,7 @@ var vm = new Vue({
             })
             return data;
 
+
         }
 
     }
