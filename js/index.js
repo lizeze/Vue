@@ -17,14 +17,8 @@ var vm = new Vue({
         sortKey: null,
         searchQuery: null
     }, methods: {
-        sortOrders: function () {
-            var sortOrders = {}
-            this.columns.forEach(function (item) {
-                sortOrders[item.key] = 1
-            })
-            return sortOrders;
 
-        },
+
         sortBy: function (data) {
             vm.activeKey = data.key
             this.sortOrders[data.key] = this.sortOrders[data.key] * -1
