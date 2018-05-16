@@ -11,19 +11,25 @@
 <body>
 <div id="example">
 
+    <form id="search">
+        Search <input name="query" v-model="searchQuery">
+    </form>
+    
     <table>
         <thead>
         <tr>
 
             <th v-for="item in columns">
                 <a  @click.prevent="sortBy(item)"   v-bind:class="{active:item.key==activeKey}"      href="#">{{item.text}}</a>
+                <span class="arrow" :class="sortOrders[item.key] > 0 ? 'asc' : 'dsc'">
+          </span>
             </th>
         </tr>
         </thead>
 
         <tbody>
 
-        <tr v-for="item in content">
+        <tr v-for="item in filetyData">
 
             <td>{{item.name}}</td>
             <td>{{item.age}}</td>
