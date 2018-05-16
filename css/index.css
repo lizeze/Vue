@@ -1,0 +1,34 @@
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit
+}
+
+table {
+
+    border: 3px solid #64B687;
+}
+
+table thead tr th {
+
+    min-width: 120px;
+    background-color: #64B687;
+    text-align: center;
+    color: #CAE6D6;
+}
+
+table thead tr th .active {
+
+    color: #FFFFFF;
+
+}
+
+table tbody tr td {
+
+    background-color: #F9F9F9;
+    text-align: center;
+    border-bottom: 1px solid #FFFFFF;
+}

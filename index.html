@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Document</title>
+</head>
+<body>
+<div id="example">
+
+    <table>
+        <thead>
+        <tr>
+
+            <th v-for="item in columns">
+                <a  @click.prevent="sortBy(item)"   v-bind:class="{active:item.key==activeKey}"      href="#">{{item.text}}</a>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr v-for="item in content">
+
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<script src="lib/vue.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
