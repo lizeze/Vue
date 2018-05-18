@@ -35,8 +35,8 @@
 
             <tr v-for="item in filetyData">
 
-                <td>{{item.name}}</td>
-                <td>{{item.age}}</td>
+                <td>{{item.appName}}</td>
+                <td>{{item.appDescribe}}</td>
 
             </tr>
 
@@ -58,21 +58,74 @@
         </div>
     </div>
 
-    <div class="wrapper "  id="custom-input-demo">
-         <custom-input v-model="name">
-             Something bad happened.
-         </custom-input>
-         <p>{{name}}</p>
-        <component v-bind:is="input" v-model="name"></component>
+    <div class="wrapper " id="custom-input-demo">
+        <custom-input v-model="name">
+            Something bad happened.
+        </custom-input>
+        <p>{{name}}</p>
+        <textarea v-model="name"></textarea>
+    </div>
+
+    <div class="wrapper " id="custom-tab-demo">
+        <div class="customer-tab">
+
+            <button v-for="btn  in buttons" v-bind:class="{tabButton:true,active:btn.text==currentTab}"
+                    v-on:click="changeTab(btn.text)">{{btn.text}}
+            </button>
+            <br>
+            <component v-bind:is="activeTab"></component>
+
+        </div>
+    </div>
+
+    <div class="wrapper" id="custom-grid-demo">
+
+        <form>
+          Search   <input name="query" v-model="searchQuery">
+
+        </form>
+        <custom-grid :data="data" :columns="columns" :filter-key="searchQuery">
+
+
+        </custom-grid>
+
     </div>
 
 
+    <script type="text/x-template" id="grid-template">
+        <table>
+            <thead>
+            <tr>
+                 <th></th>
+                <th v-for="(item,index) in columns " @click="sortBy(item)">
+                    <a v-bind:class="{active:item.key==activeKey}"> {{item.text}}</a>
+                    <span class="arrow" :class="sortOrders[item.key] > 0 ? 'asc' : 'dsc'"></span>
+                </th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr v-for="(entity,index) in filetyData">
+                  <td>{{index+1}}</td>
+
+                <td v-for="(column,index) in columns ">
+
+                    {{entity[column.key]}}
+                </td>
+            </tr>
+            </tbody>
+
+
+        </table>
+    </script>
 
 
 </div>
+<script src="lib/Ajax.js"></script>
 <script src="lib/vue.js"></script>
 <script src="js/component.js"></script>
 
 <script src="js/index.js"></script>
+
 </body>
 </html>

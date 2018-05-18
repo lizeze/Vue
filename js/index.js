@@ -3,17 +3,12 @@ var vm = new Vue({
     el: '#example',
     data: {
         activeKey: '',
-        data: [
-            {name: '张三', age: 12,},
-            {name: '李四', age: 26,},
-            {name: '王五', age: 17},
-            {name: '小六', age: 13,}
-        ],
+        data: [],
         columns: [
-            {text: '姓名', key: 'name'},
-            {text: '年龄', key: 'age'}
+            {text: '名称', key: 'appName'},
+            {text: '描述', key: 'appDescribe'}
         ],
-        sortOrders: {name: 1, age: 1},
+        sortOrders: {appName: 1, appDescribe: 1},
         sortKey: null,
         searchQuery: null
     }, methods: {
@@ -22,7 +17,8 @@ var vm = new Vue({
             this.sortOrders[data.key] = this.sortOrders[data.key] * -1
         },
 
-    }, computed: {
+    },
+    computed: {
         filetyData: function () {
             var data = this.data
             var order = this.sortOrders[this.activeKey] || 1
@@ -47,6 +43,13 @@ var vm = new Vue({
 
         }
 
+    },
+    created: function () {
+        var vthis = this;
+        getAjax('http://localhost:8081/app/', function (data) {
+            vthis.data = data;
+
+        })
     }
 
 })
@@ -70,3 +73,43 @@ new Vue({
         name: ''
     }
 })
+
+new Vue({
+    el: '#custom-tab-demo',
+    data: {
+        buttons: [{text: 'JavaScript', key: 1}, {text: 'Jquery', key: 2}, {text: 'Vue', key: 3}],
+        currentTab: 'JavaScript'
+    },
+    methods: {
+
+
+        changeTab: function (key) {
+            this.currentTab = key;
+        }
+    }, computed: {
+
+        activeTab: function () {
+
+            return 'custom-' + this.currentTab;
+        }
+
+    }
+})
+
+new Vue({
+
+    el: '#custom-grid-demo',
+    data: {
+        columns: [{key: 'appName', text: '名称'}, {key: 'appDescribe', text: '描述'}],
+        data:[],
+        searchQuery:''
+    },created:function () {
+        var vthis = this;
+        getAjax('http://localhost:8081/app/', function (data) {
+            vthis.data = data;
+
+        })
+    }
+
+})
+
